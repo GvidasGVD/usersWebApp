@@ -35,3 +35,9 @@
 .nav a.active {
   color: #e6fcfc;
 }
+
+.linkToGit {
+  font-size: 20px;
+  padding-left: 10px;
+  color: white;
+}
