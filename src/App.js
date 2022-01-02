@@ -21,6 +21,9 @@ function App() {
         <Route path="/new-user">
           <NewUser />
         </Route>
+        <Route path="/usersWebApp" exact>
+          <Redirect to="/users" />
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>
