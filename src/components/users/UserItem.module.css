@@ -25,6 +25,8 @@
   text-align: left;
   font-size: 1.5rem;
   color: #212929;
+  overflow: auto;
+
 }
 
 .item p {

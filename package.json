@@ -1,5 +1,5 @@
 {
-  "homepage":"https://GvidasGVD.github.io/usersWebApp",
+  "homepage": "https://GvidasGVD.github.io/usersWebApp",
   "name": "webapp",
   "version": "0.1.0",
   "private": true,
@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "formik": "^2.2.6",
+    "moment": "^2.29.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-confirm-alert": "^2.7.0",
@@ -17,7 +18,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "predeploy": "npm run build",

@@ -5,6 +5,7 @@ import useHttp from "../../hooks/use-http";
 import { deleteUser } from "../../api/userApi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { userSchema } from "../../validations/UserValidation";
 
 const UserDetails = (props) => {
   const history = useHistory();
@@ -49,7 +50,7 @@ const UserDetails = (props) => {
     setEditing(!editing);
   };
 
-  function submitEditingHandler(event) {
+  const submitEditingHandler = async (event) =>{
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value
@@ -88,7 +89,13 @@ const UserDetails = (props) => {
       passport_number: enteredPassportnumber,
     };
     editToggleUserHandler();
-    props.sendUpdateRequest(userData, props.id);
+    const isValid = await userSchema.isValid(userData);
+    if (isValid) {
+      props.sendUpdateRequest(userData, props.id);
+    } else {
+      alert("Could not update, wrong values inserted");
+    }
+    
   }
 
   const usersNameInput = (

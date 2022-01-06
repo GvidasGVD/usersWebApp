@@ -26,8 +26,9 @@ const AllUsers = () => {
   if (status === "completed" && (!loadedUsers || loadedUsers.length === 0)) {
     return <NoUsersFound />;
   }
-
-  return <UserList users={loadedUsers} />;
+  return (
+      <UserList users={loadedUsers} />
+  );
 };
 
 export default AllUsers;

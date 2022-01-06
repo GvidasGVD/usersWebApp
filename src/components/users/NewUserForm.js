@@ -1,9 +1,9 @@
 import { useRef } from "react";
-
+import { userSchema } from "../../validations/UserValidation";
 import Card from "../ui/Card";
 import classes from "./NewUserForm.module.css";
 
-function NewUserForm(props) {
+const NewUserForm = (props) => {
   const nameInputRef = useRef();
   const surnameInputRef = useRef();
   const birthdateInputRef = useRef();
@@ -13,7 +13,7 @@ function NewUserForm(props) {
   const identityInputRef = useRef();
   const passportnumberInputRef = useRef();
 
-  function submitHandler(event) {
+  const submitHandler = async (event) => {
     event.preventDefault();
     const enteredName = nameInputRef.current.value;
     const enteredSurname = surnameInputRef.current.value;
@@ -34,9 +34,13 @@ function NewUserForm(props) {
       identity: enteredIdentity,
       passport_number: enteredPassportnumber,
     };
-
-    props.onAddUser(userData);
-  }
+    const isValid = await userSchema.isValid(userData);
+    if (isValid) {
+      props.onAddUser(userData);
+    } else {
+      alert("Could not create, wrong values inserted");
+    }
+  };
 
   return (
     <Card>
@@ -69,21 +73,41 @@ function NewUserForm(props) {
         <div className={classes.control}>
           <div>
             <label htmlFor="password">Password</label>
-            <input id="password" type="password" required ref={passwordInputRef}></input>
+            <input
+              id="password"
+              type="password"
+              required
+              ref={passwordInputRef}
+            ></input>
           </div>
           <div>
             <label htmlFor="phone">Phone</label>
-            <input id="phone" type="number" required ref={phoneInputRef}></input>
+            <input
+              id="phone"
+              type="number"
+              required
+              ref={phoneInputRef}
+            ></input>
           </div>
         </div>
         <div className={classes.control}>
           <div>
             <label htmlFor="identity">Identity</label>
-            <input id="identity" type="number" required ref={identityInputRef}></input>
+            <input
+              id="identity"
+              type="number"
+              required
+              ref={identityInputRef}
+            ></input>
           </div>
           <div>
             <label htmlFor="passportnumber">Passport Number</label>
-            <input id="passportnumber" type="number" required ref={passportnumberInputRef}></input>
+            <input
+              id="passportnumber"
+              type="number"
+              required
+              ref={passportnumberInputRef}
+            ></input>
           </div>
         </div>
         <div className={classes.actions}>
@@ -92,6 +116,6 @@ function NewUserForm(props) {
       </form>
     </Card>
   );
-}
+};
 
 export default NewUserForm;
