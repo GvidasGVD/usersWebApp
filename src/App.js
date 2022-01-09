@@ -9,10 +9,10 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/usersWebApp" exact>
-          <Redirect to="/usersWebApp/users" />
-        </Route>
         <Route path="/usersWebApp/users" exact>
+          <Redirect to="/usersWebApp" />
+        </Route>
+        <Route path="/usersWebApp" exact>
           <AllUsers />
         </Route>
         <Route path="/usersWebApp/users/:userId">
