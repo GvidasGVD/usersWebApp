@@ -31,7 +31,7 @@ const NewUserForm = (props) => {
       email: enteredEmail,
       password: enteredPassword,
       phone: enteredPhone,
-      identity: enteredIdentity,
+      identity: parseInt(enteredIdentity),
       passport_number: enteredPassportnumber,
     };
     const isValid = await userSchema.isValid(userData);
