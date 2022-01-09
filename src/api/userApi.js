@@ -3,7 +3,7 @@ const FIREBASE_DOMAIN =
   "https://users-db-2791b-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function getAllUsers() {
-  const response = await fetch(`${FIREBASE_DOMAIN}/users.json`);
+  const response = await fetch(`${FIREBASE_DOMAIN}/usersWebApp/users.json`);
   const data = await response.json();
 
   if (!response.ok) {
@@ -25,7 +25,7 @@ export async function getAllUsers() {
 }
 
 export async function getSingleUser(userId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/users/${userId}.json`);
+  const response = await fetch(`${FIREBASE_DOMAIN}/usersWebApp/users/${userId}.json`);
   const data = await response.json();
 
   if (!response.ok) {
@@ -41,7 +41,7 @@ export async function getSingleUser(userId) {
 }
 
 export async function addUser(userData) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/users.json`, {
+  const response = await fetch(`${FIREBASE_DOMAIN}/usersWebApp/users.json`, {
     method: "POST",
     body: JSON.stringify(userData),
     headers: {
@@ -58,7 +58,7 @@ export async function addUser(userData) {
 }
 
 export async function deleteUser(userId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/users/${userId}.json`, {
+  const response = await fetch(`${FIREBASE_DOMAIN}/usersWebApp/users/${userId}.json`, {
     method: "DELETE",
   });
   const data = await response.json();
@@ -71,7 +71,7 @@ return null
 }
 
 export async function updateUser(userData, userId) {
-    const response = await fetch(`${FIREBASE_DOMAIN}/users/${userId}.json`, {
+    const response = await fetch(`${FIREBASE_DOMAIN}/usersWebApp/users/${userId}.json`, {
       method: "PUT",
       headers:{
           'Accept': 'application/json',

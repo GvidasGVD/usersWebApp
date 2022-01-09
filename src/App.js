@@ -9,20 +9,20 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/" exact>
-          <Redirect to="/users" />
+        <Route path="/usersWebApp" exact>
+          <Redirect to="/usersWebApp/users" />
         </Route>
-        <Route path="/users" exact>
+        <Route path="/usersWebApp/users" exact>
           <AllUsers />
         </Route>
-        <Route path="/users/:userId">
+        <Route path="/usersWebApp/users/:userId">
           <UserDetail />
         </Route>
-        <Route path="/new-user">
+        <Route path="/usersWebApp/new-user">
           <NewUser />
         </Route>
-        <Route path="/usersWebApp" exact>
-          <Redirect to="/users" />
+        <Route path="/usersWebApp/usersWebApp" exact>
+          <Redirect to="/usersWebApp/users" />
         </Route>
         <Route path="*">
           <NotFound />

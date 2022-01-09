@@ -10,7 +10,7 @@ const NewUser = () => {
 
     useEffect(() => {
         if(status === 'completed') {
-            history.push('/users')
+            history.push('/usersWebApp/users')
         }
     }, [status, history])
 

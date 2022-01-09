@@ -42,7 +42,7 @@ const UserDetails = (props) => {
 
   useEffect(() => {
     if (deleteStatus === "completed") {
-      history.push("/users");
+      history.push("/usersWebApp/users");
     }
   }, [deleteStatus, history]);
 
@@ -166,7 +166,7 @@ const UserDetails = (props) => {
         <p>{!editing ? props.passport_number : usersPassportNoInput}</p>
       </div>
       <div className={classes.btnField}>
-        <Link className={`btn ${classes.detailsBtn}`} to={"/users"}>
+        <Link className={`btn ${classes.detailsBtn}`} to={"/usersWebApp/users"}>
           Back
         </Link>
         <button
