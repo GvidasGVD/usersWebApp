@@ -144,7 +144,7 @@ const NewUserForm = (props) => {
           <div className={classes.error_message}>{error.message}</div>
         </div>
       )}
-
+ 
       <form className={classes.form} onSubmit={submitHandler}>
         <div className={classes.control}>
           <div className="w-50">
