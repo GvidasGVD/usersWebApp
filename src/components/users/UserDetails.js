@@ -5,7 +5,8 @@ import useHttp from "../../hooks/use-http";
 import { deleteUser } from "../../api/userApi";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { userSchema } from "../../validations/UserValidation";
+// import { userSchema } from "../../validations/UserValidation";
+import { validateUserData } from "../../validations/FormDataValidation";
 
 const UserDetails = (props) => {
   const history = useHistory();
@@ -14,6 +15,7 @@ const UserDetails = (props) => {
     deleteUser,
     true
   );
+  const [error, setError] = useState();
 
   const nameInputRef = useRef();
   const surnameInputRef = useRef();
@@ -50,7 +52,7 @@ const UserDetails = (props) => {
     setEditing(!editing);
   };
 
-  const submitEditingHandler = async (event) =>{
+  const submitEditingHandler = async (event) => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value
@@ -89,14 +91,29 @@ const UserDetails = (props) => {
       passport_number: enteredPassportnumber,
     };
     editToggleUserHandler();
-    const isValid = await userSchema.isValid(userData);
-    if (isValid) {
-      props.sendUpdateRequest(userData, props.id);
+    const {
+      isValid,
+      title: errorTitle,
+      message: errorMessage,
+    } = validateUserData(userData);
+
+    if (!isValid) {
+      setError({
+        title: errorTitle,
+        message: errorMessage,
+      });
+      return;
     } else {
-      alert("Could not update, wrong values inserted");
+      props.sendUpdateRequest(userData, props.id);
     }
-    
-  }
+
+    // const isValid = await userSchema.isValid(userData);
+    // if (isValid) {
+    //   props.sendUpdateRequest(userData, props.id);
+    // } else {
+    //   alert("Could not update, wrong values inserted");
+    // }
+  };
 
   const usersNameInput = (
     <input type="text" placeholder={props.name} ref={nameInputRef} />
@@ -104,24 +121,24 @@ const UserDetails = (props) => {
   const usersSurnameInput = (
     <input type="text" placeholder={props.surname} ref={surnameInputRef} />
   );
-  const usersNameInBirthDateput = (
-    <input type="date" ref={birthdateInputRef} />
-  );
+  const usersNameInBirthDateput = <input type="date" ref={birthdateInputRef} />;
   const usersEmailInput = (
     <input type="email" placeholder={props.email} ref={emailInputRef} />
   );
   const usersPasswordInput = (
-    <input
-      type="password"
-      placeholder='******'
-      ref={passwordInputRef}
-    />
+    <input type="password" placeholder="******" ref={passwordInputRef} />
   );
   const usersPhoneInput = (
     <input type="number" placeholder={props.phone} ref={phoneInputRef} />
   );
   const usersIdentityInput = (
-    <input type="number" placeholder={props.identity} ref={identityInputRef} />
+    // <input placeholder={props.identity} ref={identityInputRef} />
+    <select id="identity" ref={identityInputRef}>
+              <option value="ID">
+                ID
+              </option>
+              <option value="Passport">Passport</option>
+            </select>
   );
   const usersPassportNoInput = (
     <input
@@ -133,6 +150,13 @@ const UserDetails = (props) => {
 
   return (
     <div className={classes.details}>
+      {error && (
+        <div className={classes.error_box}>
+          {" "}
+          <div className={classes.error_title}>{error.title}</div>
+          <div className={classes.error_message}>{error.message}</div>
+        </div>
+      )}
       <div className={classes.flex}>
         <p>Name: </p>
         <p>{!editing ? props.name : usersNameInput}</p>

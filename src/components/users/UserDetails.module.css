@@ -58,6 +58,16 @@ input.passwordInput:focus{
 input.passwordInput:hover{
   border: none;
 }
+.error_box{
+  padding: 1rem;
+  line-height: 1.5;
+}
+  .error_title {
+    color: red;
+  }
 
+.error_message {
+  color: grey;
+}
 
 
